@@ -1,0 +1,35 @@
+{
+  "name": "boilerplate",
+  "version": "0.0.1",
+  "description": "Boilerplate extracted from hivewallet/hive-js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shiawuen",
+  "license": "MIT",
+  "dependencies": {
+    "aperture": "^1.1.1",
+    "browserify": "^5.9.1",
+    "browserify-zepto": "^1.1.4",
+    "gulp": "^3.8.6",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.3.4",
+    "gulp-livereload": "^2.1.0",
+    "gulp-sass": "^0.7.2",
+    "koa": "^0.8.2",
+    "ractify": "^0.5.0",
+    "ractive": "^0.5.5",
+    "tiny-lr": "0.0.9",
+    "vinyl-source-stream": "^0.1.1"
+  },
+  "devDependencies": {},
+  "aperture": {
+    "sources": [
+      "app/lib/*",
+      "app/pages/*",
+      "app/widgets/*"
+    ]
+  }
+}
