@@ -4,16 +4,19 @@ var prefix = require('gulp-autoprefixer')
 var concat = require('gulp-concat')
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
-var refresh = require('gulp-livereload')
-var lrserver = require('tiny-lr')()
 var clean = require('gulp-clean')
+var connect = require('gulp-connect')
 
 // server --------------------------------- //
 
-// var livereloadport = 35729
+var port = 3000
 
 gulp.task('serve', function() {
-  lrserver.listen();
+  connect.server({
+    root: './build',
+    port: port,
+    livereload: true
+  })
 })
 
 // main tasks ------------------------------ //
@@ -23,14 +26,14 @@ gulp.task('styles', function(){
     .pipe(sass())
     .pipe(prefix())
     .pipe(gulp.dest('./build/assets/css/'))
-    .pipe(refresh(lrserver));
+    .pipe(connect.reload());
 });
 
 gulp.task('scripts', function(){
   var bundler = browserify('./app/application.js')
   bundle(bundler, './application.js')
     .pipe(gulp.dest('./build/assets/js/'))
-    .pipe(refresh(lrserver));
+    .pipe(connect.reload());
 });
 
 gulp.task('loader', function(){
@@ -41,13 +44,13 @@ gulp.task('loader', function(){
   var bundler = browserify('./app/loader/index.js')
   bundle(bundler, './loader.js')
     .pipe(gulp.dest('./build/assets/js/'))
-    .pipe(refresh(lrserver));
+    .pipe(connect.reload());
 });
 
 gulp.task('html', function(){
   gulp.src('./app/index.html')
     .pipe(gulp.dest('./build/'))
-    .pipe(refresh(lrserver));
+    .pipe(connect.reload());
 });
 
 gulp.task('clean-assets', function(){
@@ -58,7 +61,7 @@ gulp.task('clean-assets', function(){
 gulp.task('assets', ['clean-assets'], function(){
   gulp.src('./app/assets/**/*')
     .pipe(gulp.dest('./build/assets/'))
-    .pipe(refresh(lrserver));
+    .pipe(connect.reload());
 });
 
 gulp.task('tests', function(){
